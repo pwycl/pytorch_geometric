@@ -37,7 +37,6 @@ nets = [
     GIN0WithJK,
     GINWithJK,
     Graclus,
-    TopK,
     SAGPool,
     GCN,
     GraphSAGE,
@@ -46,6 +45,7 @@ nets = [
     GlobalAttentionNet,
     Set2SetNet,
     SortPool,
+    TopK,
 ]
 
 
