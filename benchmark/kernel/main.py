@@ -24,8 +24,8 @@ parser.add_argument('--lr_decay_step_size', type=int, default=50)
 parser.add_argument('--folds',type=int,default=10)
 args = parser.parse_args()
 
-layers = [1, 2, 3, 4, 5]
-hiddens = [16, 32, 64, 128]
+layers = [4] #[1, 2, 3, 4, 5]
+hiddens = [32,64] #[16, 32, 64, 128]
 datasets = ['MUTAG', 'PROTEINS', 'IMDB-BINARY', 'REDDIT-BINARY','ENZYMES']  # , 'COLLAB']
 nets = [
     # GCNWithJK,
