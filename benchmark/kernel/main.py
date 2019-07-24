@@ -62,7 +62,7 @@ for dataset_name, Net in product(datasets, nets):
         loss, acc, std = cross_validation_with_val_set(
             dataset,
             model,
-            folds=2,
+            folds=10,
             epochs=args.epochs,
             batch_size=args.batch_size,
             lr=args.lr,
