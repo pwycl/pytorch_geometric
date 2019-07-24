@@ -1,11 +1,7 @@
 __pycache__/
 data/
-build/
-dist/
 alpha/
 .cache/
-.eggs/
-*.egg-info/
 .coverage
 .coverage.*
 
