@@ -22,8 +22,7 @@ parser.add_argument('--lr', type=float, default=0.01)
 parser.add_argument('--lr_decay_factor', type=float, default=0.5)
 parser.add_argument('--lr_decay_step_size', type=int, default=50)
 parser.add_argument('--folds',type=int,default=3)
-parser.add_argument('--dataset',default='MUTAG',
-    choices=['MUTAG', 'PROTEINS', 'IMDB-BINARY', 'REDDIT-BINARY','ENZYMES' ,'COLLAB'])
+parser.add_argument('--dataset',default='MUTAG')
 args = parser.parse_args()
 
 layers = [4] #[1, 2, 3, 4, 5]
