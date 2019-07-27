@@ -4,7 +4,7 @@ import torch
 from torch_geometric.datasets import TUDataset
 from torch_geometric.utils import degree
 import torch_geometric.transforms as T
-
+import shutil
 
 class NormalizedDegree(object):
     def __init__(self, mean, std):
@@ -20,6 +20,7 @@ class NormalizedDegree(object):
 
 def get_dataset(name, sparse=True):
     path = osp.join(osp.dirname(osp.realpath(__file__)), '..', 'data', name)
+    shutil.copytree('../input/smt', path)
     dataset = TUDataset(path, name, use_node_attr=True)
     dataset.data.edge_attr = None
 
