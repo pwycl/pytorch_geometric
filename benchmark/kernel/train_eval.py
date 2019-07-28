@@ -51,7 +51,7 @@ def cross_validation_with_val_set(dataset,
             val_losses.append(eval_loss(model, val_loader))
             accs.append(eval_acc(model, test_loader))
 
-            print('Train Loss: {:.4f}, Test Accuracy: {:.3f} '.format(train_loss[-1], accs[-1])
+            print('Train Loss: {:.4f}, Test Accuracy: {:.3f} '.format(train_loss[-1], accs[-1]))
             
             eval_info = {
                 'fold': fold,
