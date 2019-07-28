@@ -1,5 +1,6 @@
 import time
 
+import tqdm
 import torch
 import torch.nn.functional as F
 from torch import tensor
@@ -116,7 +117,7 @@ def train(model, optimizer, loader):
     model.train()
 
     total_loss = 0
-    for data in loader:
+    for data in tqdm(loader):
         optimizer.zero_grad()
         data = data.to(device)
         out = model(data)
@@ -125,7 +126,6 @@ def train(model, optimizer, loader):
         total_loss += loss.item() * num_graphs(data)
         optimizer.step()
 
-        print('Train Loss: {:.4f}'.format(total_loss / len(loader.dataset)))
     return total_loss / len(loader.dataset)
 
 
