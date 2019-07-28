@@ -55,6 +55,10 @@ def cross_validation_with_val_set(dataset,
             print('Acc in Epoch: ',epoch)
             accs.append(eval_acc(model, test_loader))
             
+
+            print('Train Loss: {:.4f}, Val_loss: {:.4f}, Test Accuracy: {:.3f}'.
+          format(train_loss, val_losses[-1], accs[-1]))
+
             eval_info = {
                 'fold': fold,
                 'epoch': epoch,
