@@ -50,8 +50,6 @@ def cross_validation_with_val_set(dataset,
             train_loss = train(model, optimizer, train_loader)
             val_losses.append(eval_loss(model, val_loader))
             accs.append(eval_acc(model, test_loader))
-
-            print('Train Loss: {:.4f}, Test Accuracy: {:.3f} '.format(train_loss[-1], accs[-1]))
             
             eval_info = {
                 'fold': fold,
@@ -126,6 +124,8 @@ def train(model, optimizer, loader):
         loss.backward()
         total_loss += loss.item() * num_graphs(data)
         optimizer.step()
+
+        print('Train Loss: {:.4f}'.format(total_loss / len(loader.datase)))
     return total_loss / len(loader.dataset)
 
 
