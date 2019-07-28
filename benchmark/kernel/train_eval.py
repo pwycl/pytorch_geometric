@@ -117,7 +117,7 @@ def train(model, optimizer, loader):
     model.train()
 
     total_loss = 0
-    for data in tqdm(loader):
+    for data in tqdm.tqdm(loader):
         optimizer.zero_grad()
         data = data.to(device)
         out = model(data)
