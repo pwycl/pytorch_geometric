@@ -25,6 +25,8 @@ def get_dataset(name, sparse=True):
     except shutil.Error as e:
         for src,dst,msg in e.args[0]:
             print(dst,src,msg)
+    except FileExistsError as e:
+        print(e)
     
     dataset = TUDataset(path, name, use_node_attr=True)
     dataset.data.edge_attr = None
