@@ -125,7 +125,7 @@ def train(model, optimizer, loader):
         total_loss += loss.item() * num_graphs(data)
         optimizer.step()
 
-        print('Train Loss: {:.4f}'.format(total_loss / len(loader.datase)))
+        print('Train Loss: {:.4f}'.format(total_loss / len(loader.dataset)))
     return total_loss / len(loader.dataset)
 
 
