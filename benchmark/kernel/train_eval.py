@@ -48,8 +48,11 @@ def cross_validation_with_val_set(dataset,
         t_start = time.perf_counter()
 
         for epoch in range(1, epochs + 1):
+            print('Train in Epoch: ',epoch)
             train_loss = train(model, optimizer, train_loader)
+            print('Val in Epoch: ',epoch)
             val_losses.append(eval_loss(model, val_loader))
+            print('Acc in Epoch: ',epoch)
             accs.append(eval_acc(model, test_loader))
             
             eval_info = {
@@ -133,7 +136,7 @@ def eval_acc(model, loader):
     model.eval()
 
     correct = 0
-    for data in loader:
+    for data in tqdm.tqdm(loader):
         data = data.to(device)
         with torch.no_grad():
             pred = model(data).max(1)[1]
@@ -145,7 +148,7 @@ def eval_loss(model, loader):
     model.eval()
 
     loss = 0
-    for data in loader:
+    for data in tqdm.tqdm(loader):
         data = data.to(device)
         with torch.no_grad():
             out = model(data)
