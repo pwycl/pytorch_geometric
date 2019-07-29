@@ -72,7 +72,7 @@ for dataset_name, Net in product(datasets, nets):
             lr_decay_factor=args.lr_decay_factor,
             lr_decay_step_size=args.lr_decay_step_size,
             weight_decay=0,
-            logger=None)
+            logger=logger)
         if loss < best_result[0]:
             best_result = (loss, acc, std)
 

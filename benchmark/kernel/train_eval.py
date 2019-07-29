@@ -48,16 +48,20 @@ def cross_validation_with_val_set(dataset,
         t_start = time.perf_counter()
 
         for epoch in range(1, epochs + 1):
-            print('Train in Epoch: ',epoch)
+            print('Train loss in Epoch: ',epoch)
             train_loss = train(model, optimizer, train_loader)
-            print('Val in Epoch: ',epoch)
+            print('Train acc in Epoch: ',epoch)
+            train_acc=eval_acc(model,train_loader)
+            print('Val loss in Epoch: ',epoch)
             val_losses.append(eval_loss(model, val_loader))
+            print('Val acc in Epoch: ',epoch)
+            val_acc=eval_acc(model,val_loader)
             print('Acc in Epoch: ',epoch)
             accs.append(eval_acc(model, test_loader))
             
 
-            print('Train Loss: {:.4f}, Val_loss: {:.4f}, Test Accuracy: {:.3f}'.
-          format(train_loss, val_losses[-1], accs[-1]))
+            print('Train Loss: {:.4f}, Train Acc: {:.4f}, Val loss: {:.4f}, Val Acc: {:.4f}, Test Accuracy: {:.3f}'.
+          format(train_loss, train_acc, val_losses[-1], val_acc, accs[-1]))
 
             eval_info = {
                 'fold': fold,
