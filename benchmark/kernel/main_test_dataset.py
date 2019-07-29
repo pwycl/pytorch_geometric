@@ -25,8 +25,8 @@ parser.add_argument('--folds',type=int,default=3)
 parser.add_argument('--dataset',default='MUTAG')
 args = parser.parse_args()
 
-layers = [4] #[1, 2, 3, 4, 5]
-hiddens = [32,64] #[16, 32, 64, 128]
+layers = [1, 2, 3, 4, 5]
+hiddens = [16, 32, 64, 128]
 # datasets = ['MUTAG', 'PROTEINS', 'IMDB-BINARY', 'REDDIT-BINARY','ENZYMES']  # , 'COLLAB']
 datasets=[args.dataset]
 nets = [

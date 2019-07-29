@@ -47,6 +47,8 @@ def cross_validation_with_val_set(dataset,
 
         t_start = time.perf_counter()
 
+        if fold>1:
+            break
         for epoch in range(1, epochs + 1):
             print('Train loss in Epoch: ',epoch)
             train_loss = train(model, optimizer, train_loader)
