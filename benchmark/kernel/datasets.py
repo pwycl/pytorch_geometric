@@ -69,6 +69,6 @@ def get_dataset(name, sparse=True):
             dataset.transform = T.Compose(
                 [dataset.transform, T.ToDense(num_nodes)])
 
-    # dataset=dataset.shuffle()[:len(dataset)//3]
+    dataset=dataset.shuffle()[:len(dataset)//5]
 
     return dataset
