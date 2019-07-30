@@ -18,7 +18,7 @@ class NormalizedDegree(object):
         return data
 
 
-def get_dataset(name, sparse=True):
+def get_dataset(name, sparse=True, dataset_div=None):
     path = osp.join(osp.dirname(osp.realpath(__file__)), '..', 'data', name)
     try:
         shutil.copytree('../input/smt', path)
@@ -69,6 +69,7 @@ def get_dataset(name, sparse=True):
             dataset.transform = T.Compose(
                 [dataset.transform, T.ToDense(num_nodes)])
 
-    dataset=dataset.shuffle()[:len(dataset)//5]
+    if dataset_div!=None:
+        dataset=dataset.shuffle()[:len(dataset)//dataset_div]
 
     return dataset

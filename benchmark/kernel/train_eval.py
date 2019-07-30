@@ -13,8 +13,8 @@ from torch_geometric.data import DataLoader, DenseDataLoader as DenseLoader
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 file_name=osp.join('/kaggle/working',str(random.randrange(sys.maxsize))+'.txt')
-with open(file_name,'w') as f: #clear the output file
-    pass
+# with open(file_name,'w') as f: #clear the output file
+#     pass
 
 def cross_validation_with_val_set(dataset,
                                   model,
