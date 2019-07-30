@@ -54,10 +54,9 @@ def cross_validation_with_val_set(dataset,
             train_loss = train(model, optimizer, train_loader)
             print('Train acc in Epoch: ',epoch)
             train_acc=eval_acc(model,train_loader)
-            print('Val loss in Epoch: ',epoch)
-            val_losses.append(eval_loss(model, val_loader))
-            print('Val acc in Epoch: ',epoch)
-            val_acc=eval_acc(model,val_loader)
+            print('Val in Epoch: ',epoch)
+            v_loss,val_acc=eval_loss_acc(model, val_loader)
+            val_losses.append(v_loss)
             print('Acc in Epoch: ',epoch)
             accs.append(eval_acc(model, test_loader))
             
@@ -87,9 +86,9 @@ def cross_validation_with_val_set(dataset,
         durations.append(t_end - t_start)
 
     loss, acc, duration = tensor(val_losses), tensor(accs), tensor(durations)
-    loss, acc = loss.view(folds, epochs), acc.view(folds, epochs)
+    loss, acc = loss.view(-1, epochs), acc.view(-1, epochs)
     loss, argmin = loss.min(dim=1)
-    acc = acc[torch.arange(folds, dtype=torch.long), argmin]
+    acc = acc[torch.arange(-1, dtype=torch.long), argmin]
 
     loss_mean = loss.mean().item()
     acc_mean = acc.mean().item()
@@ -164,3 +163,17 @@ def eval_loss(model, loader):
             out = model(data)
         loss += F.nll_loss(out, data.y.view(-1), reduction='sum').item()
     return loss / len(loader.dataset)
+
+def eval_loss_acc(model,loader):
+    model.eval()
+
+    loss = 0
+    correct=0
+    for data in tqdm.tqdm(loader):
+        data=data.to(device)
+        with torch.no_grad():
+            out=model(data)
+            pred=out.max(1)[1]
+        loss+=F.nll_loss(out,data.y.view(-1),reduction='sum').item()
+        correct+=pred.eq(data.y.view(-1)).sum().item()
+        return loss/len(loader.dataset), correct/len(loader.dataset)
