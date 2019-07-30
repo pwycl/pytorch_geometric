@@ -33,6 +33,8 @@ class DiffPool(torch.nn.Module):
     def __init__(self, dataset, num_layers, hidden, ratio=0.25):
         super(DiffPool, self).__init__()
 
+        self.num_layers,self.hidden=num_layers,hidden
+
         num_nodes = ceil(ratio * dataset[0].num_nodes)
         self.embed_block1 = Block(dataset.num_features, hidden, hidden)
         self.pool_block1 = Block(dataset.num_features, hidden, num_nodes)

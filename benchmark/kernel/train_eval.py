@@ -1,3 +1,6 @@
+import sys
+import random
+import os.path as osp
 import time
 
 import tqdm
@@ -9,7 +12,9 @@ from sklearn.model_selection import StratifiedKFold
 from torch_geometric.data import DataLoader, DenseDataLoader as DenseLoader
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
+file_name=osp.join('/kaggle/working',str(random.randrange(sys.maxsize))+'.txt')
+with open(file_name,'w') as f: #clear the output file
+    pass
 
 def cross_validation_with_val_set(dataset,
                                   model,
@@ -97,6 +102,10 @@ def cross_validation_with_val_set(dataset,
     print('Val Loss: {:.4f}, Test Accuracy: {:.3f} ± {:.3f}, Duration: {:.3f}'.
           format(loss_mean, acc_mean, acc_std, duration_mean))
 
+    with open(file_name,'a') as f:
+        f.write('num_layers: {}, hidden: {}, Val Loss: {:.4f}, Test Accuracy: {:.3f} ± {:.3f}, Duration: {:.3f}'.
+          format(model.num_layers, model.hidden, loss_mean, acc_mean, acc_std, duration_mean))
+
     return loss_mean, acc_mean, acc_std
 
 
@@ -176,4 +185,4 @@ def eval_loss_acc(model,loader):
             pred=out.max(1)[1]
         loss+=F.nll_loss(out,data.y.view(-1),reduction='sum').item()
         correct+=pred.eq(data.y.view(-1)).sum().item()
-        return loss/len(loader.dataset), correct/len(loader.dataset)
+    return loss/len(loader.dataset), correct/len(loader.dataset)
