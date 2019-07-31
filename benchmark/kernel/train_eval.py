@@ -28,9 +28,12 @@ def cross_validation_with_val_set(dataset,
                                   logger=None):
 
     val_losses, accs, durations = [], [], []
+
+    acc_folds=0
     for fold, (train_idx, test_idx, val_idx) in enumerate(
             zip(*k_fold(dataset, folds))):
 
+        acc_folds+=1
         train_dataset = dataset[train_idx]
         test_dataset = dataset[test_idx]
         val_dataset = dataset[val_idx]
@@ -93,7 +96,7 @@ def cross_validation_with_val_set(dataset,
     loss, acc, duration = tensor(val_losses), tensor(accs), tensor(durations)
     loss, acc = loss.view(-1, epochs), acc.view(-1, epochs)
     loss, argmin = loss.min(dim=1)
-    acc = acc[torch.arange(-1, dtype=torch.long), argmin]
+    acc = acc[torch.arange(acc_folds, dtype=torch.long), argmin]
 
     loss_mean = loss.mean().item()
     acc_mean = acc.mean().item()
