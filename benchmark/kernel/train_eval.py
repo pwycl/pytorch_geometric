@@ -32,8 +32,6 @@ def cross_validation_with_val_set(dataset,
     acc_folds=0
     for fold, (train_idx, test_idx, val_idx) in enumerate(
             zip(*k_fold(dataset, folds))):
-
-        acc_folds+=1
         train_dataset = dataset[train_idx]
         test_dataset = dataset[test_idx]
         val_dataset = dataset[val_idx]
@@ -57,6 +55,9 @@ def cross_validation_with_val_set(dataset,
 
         if fold>1:
             break
+
+        acc_folds+=1
+
         for epoch in range(1, epochs + 1):
             print('Train loss in Epoch: ',epoch)
             train_loss = train(model, optimizer, train_loader)
