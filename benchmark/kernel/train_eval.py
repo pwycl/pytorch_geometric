@@ -107,7 +107,7 @@ def cross_validation_with_val_set(dataset,
           format(loss_mean, acc_mean, acc_std, duration_mean))
 
     with open(file_name,'a') as f:
-        f.write('num_layers: {}, hidden: {}, Val Loss: {:.4f}, Test Accuracy: {:.3f} ± {:.3f}, Duration: {:.3f}'.
+        f.write('num_layers: {}, hidden: {}, Val Loss: {:.4f}, Test Accuracy: {:.3f} ± {:.3f}, Duration: {:.3f} \n'.
           format(model.num_layers, model.hidden, loss_mean, acc_mean, acc_std, duration_mean))
 
     return loss_mean, acc_mean, acc_std
