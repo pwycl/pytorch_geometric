@@ -32,6 +32,9 @@ def get_dataset(name, sparse=True, dataset_div=None):
     dataset.data.edge_attr = None
 
     if dataset.data.x is None:
+        print('confirm the data.x do not exists!!')
+        exit(1)
+
         max_degree = 0
         degs = []
         for data in dataset:
