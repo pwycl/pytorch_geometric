@@ -26,10 +26,10 @@ parser.add_argument('--dataset',default='MUTAG')
 parser.add_argument('--dataset_div',type=int, default=None)
 args = parser.parse_args()
 
-layers = [3 ]#, 4, 5]
+layers = [4, ]#5]
 hiddens = [32, 64, 128]
 
-#layers=[1, 2,]
+#layers=[1, 2, 3]
 #hiddens = [16, ]
 # datasets = ['MUTAG', 'PROTEINS', 'IMDB-BINARY', 'REDDIT-BINARY','ENZYMES']  # , 'COLLAB']
 datasets=[args.dataset]
