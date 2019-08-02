@@ -26,7 +26,7 @@ parser.add_argument('--dataset',default='MUTAG')
 parser.add_argument('--dataset_div',type=int, default=None)
 args = parser.parse_args()
 
-layers = [3, 4]
+layers = [4]
 hiddens = [16,32, 64 ]
 
 #layers=[1, 2, 3, 4,5]
